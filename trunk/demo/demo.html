@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>jquery.menubar.js demo</title>
+		<script type="text/javascript" src="jquery-1.6.1.min.js"></script>
+		<script type="text/javascript" src="jquery-ui-1.8.11.custom.min.js"></script>
+		<script type="text/javascript" src="../jquery.menubar.js"></script>
+		<link rel="stylesheet" type="text/css" href="custom-theme/jquery-ui-1.8.11.custom.css">
+		<link rel="stylesheet" type="text/css" href="jquery.menubar.css">
+		
+		<style>
+			body { padding: 0; margin: 2em; font: 12px arial; }
+		</style>
+		
+		<script type="text/javascript">
+			$(function(){
+				$("#menubar").menubar({
+					items: [
+							{ 
+								name: "A drop down menu", 
+								open: function(){
+									$("#menubar-command").html("drop down menu");
+								},
+								items: [
+									{ 
+										name: "A check option", 
+										checkable: true,
+										attr: { tooltip: "Click to toggle whether it's checked." },
+										selecton: function(){ 
+											$("#menubar-command").html("check on");
+										},
+										selectoff: function(){
+											$("#menubar-command").html("check off");
+										}
+									},{ 
+										name: "An action", 
+										attr: { tooltip: "A super fancy action thing." },
+										selecton: function(){
+											$("#menubar-command").html("action on");
+										} 
+									},{ 
+										name: "A parent", 
+										open: function(){
+											$("#menubar-command").html("opened parent");
+										},
+										items: [
+											{ 
+												name: "One", 
+												selecton: function(){ 
+													$("#menubar-command").html("action on 1");
+												}
+											},{
+												 name: "Two",
+												 selecton: function(){ 
+												 	$("#menubar-command").html("action on 2");
+												 }
+											},{ 
+												name: "Three", 
+												selecton: function(){ 
+													$("#menubar-command").html("action on 3");
+												}
+											}
+										]
+									},
+									{
+										name: "Disabled checkable",
+										checkable: true,
+										disabled: true,
+										select: function(event, on){ $("#menubar-command").html("error: should not be able to click disabled checkable " + on); }
+									},
+									{
+										name: "Disabled clickable",
+										disabled: true,
+										selecton: function(){ $("#menubar-command").html("error: should not be able to click disabled clickable"); }
+									},
+									{
+										name: "Disabled parent",
+										disabled: true,
+										selecton: function(){ $("#menubar-command").html("error: should not be able to click disabled parent"); },
+										items: [
+											{ 
+												name: "Disabled child",
+												disabled: true,
+												selecton: function(){ $("#menubar-command").html("error: should not be able to click disabled child"); }
+											},
+											{ 
+												name: "Enabled child",
+												selecton: function(){ $("#menubar-command").html("error: should not be able to get to enabled child"); }
+											}
+										]
+									}
+								]
+							},
+							{ 
+								name: "An action",
+								selecton: function(){ $("#menubar-command").html("top level action on"); },
+								attr: { tooltip: "Maybe this is a complicated command we want a tooltip for." }
+							},
+							{ 
+								name: "A toggle option",
+								checkable: true, 
+								selecton: function(){ $("#menubar-command").html("toggle on"); },
+								selectoff: function(){ $("#menubar-command").html("toggle off"); },
+								attr: { tooltip: "Click to toggle whether this is pressed down." }
+							},
+							{ 
+								name: "D. action",
+								disabled: true,
+								selecton: function(){ $("#menubar-command").html("error: top level action on; not possible"); }
+							},
+							{ 
+								name: "D. toggle",
+								checkable: true, 
+								disabled: true,
+								selecton: function(){ $("#menubar-command").html("error: toggle on not possible for disabled"); },
+								selectoff: function(){ $("#menubar-command").html("toggle off not possible for disabled"); }
+							},
+							{ 
+								name: "D. parent",
+								disabled: true,
+								selecton: function(){ $("#menubar-command").html("error: parent open not possible for disabled"); },
+								items: [
+									{ 
+										name: "Enabled child",
+										selecton: function(){ $("#menubar-command").html("error: should not be able to get to enabled child"); }
+									}
+								]
+							}
+						]
+				});
+			});
+		</script>
+	</head>
+	
+	<body>
+	
+		<h1>jquery.menubar.js demo</h1>
+		<h2>Last action:</h2>
+		<p id="menubar-command">nothing clicked yet</p>
+		<div id="menubar"></div>
+
+	</body>
+</html>
