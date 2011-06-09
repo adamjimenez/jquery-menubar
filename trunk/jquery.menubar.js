@@ -387,7 +387,7 @@
                 });
             }
             
-            $("html").bind("click", function(){
+            $("html").bind("mousedown", function(){
                 closeAll();
             });
             
