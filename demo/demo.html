@@ -25,7 +25,7 @@
 									{ 
 										name: "A check option", 
 										checkable: true,
-										attr: { tooltip: "Click to toggle whether it's checked." },
+										attr: { title: "Click to toggle whether it's checked." },
 										selecton: function(){ 
 											$("#menubar-command").html("check on");
 										},
@@ -34,7 +34,7 @@
 										}
 									},{ 
 										name: "An action", 
-										attr: { tooltip: "A super fancy action thing." },
+										attr: { title: "A super fancy action thing." },
 										selecton: function(){
 											$("#menubar-command").html("action on");
 										} 
@@ -94,14 +94,14 @@
 							{ 
 								name: "An action",
 								selecton: function(){ $("#menubar-command").html("top level action on"); },
-								attr: { tooltip: "Maybe this is a complicated command we want a tooltip for." }
+								attr: { title: "Maybe this is a complicated command we want a title for." }
 							},
 							{ 
 								name: "A toggle option",
 								checkable: true, 
 								selecton: function(){ $("#menubar-command").html("toggle on"); },
 								selectoff: function(){ $("#menubar-command").html("toggle off"); },
-								attr: { tooltip: "Click to toggle whether this is pressed down." }
+								attr: { title: "Click to toggle whether this is pressed down." }
 							},
 							{ 
 								name: "D. action",
