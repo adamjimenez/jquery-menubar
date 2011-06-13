@@ -16,10 +16,10 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  */
 
+jQuery.fn.reverse = [].reverse;
+
 ;(function($){
-	
-	jQuery.fn.reverse = [].reverse;
-	
+   
     $.fn.menubar = function(options, param1) {  
         
     	if( options == "disable" ){
@@ -48,36 +48,11 @@
     	}
     	
         var defaults = {
-        		
-        	// whether or not to add the drop down arrow for top-level menu items
             addArrow: true,
-            
-            // text to use as arrow
             titleArrowText: "<small>&nbsp;&#9660;</small>",
-            
-            // how long to wait to open sublevel menu items
-            menuOpenDelay: 200,
-            
-            // whether to close the menu on pressing the escape key
-            closeOnEsc: true,
-            
-            // an array of more objects as the root list of menuitems
-            // e.g. 
-            // {
-            //     name: "Menu item", // the name of the menu item
-            //     checkable: false, // whether the menu item is checkable (or togglable for top-level items)
-            //     disabled: false, // whether the item should start off disabled
-            //     attr: null, // attributes to set on this menu item (e.g. { foo: "value of foo attr", bar: "value of bar attr" })
-            //     selecton: function(){}, // callback for when the item is selected on
-            //     selectoff: function(){}, // callback for when the item is selected off
-            //     select: function(selected)(){}, // callback for when item is clicked (selected set appropriately)
-            //     hoveron: function(){}, // callback for when the item is hovered over with the cursor
-            //     hoveroff: function(){}, // callback for when the item is hovered off with the cursor
-            //     open: function(){}, // callback for when a parent item is opened
-            //     close: function(){}, // callback for when a parent item is closed
-            //     items: [] // array of sub menu items
-            // }
+            menuOpenDelay: 200, // in ms
             items: undefined,
+            closeOnEsc: true
         };
         
         var options = $.extend(defaults, options); 
@@ -243,7 +218,7 @@
         
         function closeMenu(li) {
             clearTimeout(timeout);
-            
+        
             var children = li.children("ul").length > 0;
         
             li.children("ul").hide();
@@ -271,7 +246,7 @@
         	
         	// disabled accidental drag selecting on the menu
         	$(this).bind("mousedown", function(event){
-        		$("html").trigger("mousedown");
+        		$("body").trigger("mousedown");
         		return false;
         	});
         	
@@ -347,12 +322,10 @@
             	if( !disabled($(this)) ){
             		openMenu( $(this) );
             	}
-            	return false;
             }, function(){
             	if( !disabled($(this)) ){
             		closeMenu( $(this) );
             	}
-            	return false;
             });
             
             ul.children("li.ui-menu-title.ui-menu-checkable").each(function(){
@@ -365,26 +338,22 @@
             	} else if( !disabled( $(this) ) ) {
             		openMenu( $(this) );
             	}
-            	return false;
             });
             
             ul.children("li.ui-menu-title.ui-menu-clickable").mousedown(function(){
             	if( !disabled( $(this) ) ){
             		$(this).addClass("ui-state-active");
             	}
-            	return false;
             }).mouseup(function(){
             	if( !disabled( $(this) ) ){
 	            	$(this).removeClass("ui-state-active");
 	            	onMenuItemClick( $(this) );
 	            	onMenuItemOn( $(this) );
             	}
-            	return false;
             }).bind("mouseout", function(){
             	if( !disabled( $(this) ) ){
             		$(this).removeClass("ui-state-active");
             	}
-            	return false;
             });
             
             ul.find(".ui-menu-item").mouseenter(function(){
@@ -420,8 +389,6 @@
                     	onMenuItemOn( $(this) );
                     }
                 }
-                
-                return false;
             });
             
             function closeAll() {
@@ -432,7 +399,7 @@
                 });
             }
             
-            $("html").bind("mousedown", function(){
+            $("html").bind("mouseup", function(){
                 closeAll();
             });
             
