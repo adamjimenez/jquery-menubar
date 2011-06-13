@@ -1,7 +1,19 @@
-/* 
- * jQuery menubar plugin
- * by Max Franz
- * licensed under LGPL
+/**
+ * Code written by Max Franz.
+ *
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 2.1 of the License, or (at your option) any later version.
+ *
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this library; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  */
 
 ;(function($){
@@ -36,11 +48,36 @@
     	}
     	
         var defaults = {
+        		
+        	// whether or not to add the drop down arrow for top-level menu items
             addArrow: true,
+            
+            // text to use as arrow
             titleArrowText: "<small>&nbsp;&#9660;</small>",
-            menuOpenDelay: 200, // in ms
+            
+            // how long to wait to open sublevel menu items
+            menuOpenDelay: 200,
+            
+            // whether to close the menu on pressing the escape key
+            closeOnEsc: true,
+            
+            // an array of more objects as the root list of menuitems
+            // e.g. 
+            // {
+            //     name: "Menu item", // the name of the menu item
+            //     checkable: false, // whether the menu item is checkable (or togglable for top-level items)
+            //     disabled: false, // whether the item should start off disabled
+            //     attr: null, // attributes to set on this menu item (e.g. { foo: "value of foo attr", bar: "value of bar attr" })
+            //     selecton: function(){}, // callback for when the item is selected on
+            //     selectoff: function(){}, // callback for when the item is selected off
+            //     select: function(selected)(){}, // callback for when item is clicked (selected set appropriately)
+            //     hoveron: function(){}, // callback for when the item is hovered over with the cursor
+            //     hoveroff: function(){}, // callback for when the item is hovered off with the cursor
+            //     open: function(){}, // callback for when a parent item is opened
+            //     close: function(){}, // callback for when a parent item is closed
+            //     items: [] // array of sub menu items
+            // }
             items: undefined,
-            closeOnEsc: true
         };
         
         var options = $.extend(defaults, options); 
