@@ -243,7 +243,7 @@
         
         function closeMenu(li) {
             clearTimeout(timeout);
-        
+            
             var children = li.children("ul").length > 0;
         
             li.children("ul").hide();
@@ -271,7 +271,7 @@
         	
         	// disabled accidental drag selecting on the menu
         	$(this).bind("mousedown", function(event){
-        		$("body").trigger("mousedown");
+        		$("html").trigger("mousedown");
         		return false;
         	});
         	
@@ -347,10 +347,12 @@
             	if( !disabled($(this)) ){
             		openMenu( $(this) );
             	}
+            	return false;
             }, function(){
             	if( !disabled($(this)) ){
             		closeMenu( $(this) );
             	}
+            	return false;
             });
             
             ul.children("li.ui-menu-title.ui-menu-checkable").each(function(){
@@ -363,22 +365,26 @@
             	} else if( !disabled( $(this) ) ) {
             		openMenu( $(this) );
             	}
+            	return false;
             });
             
             ul.children("li.ui-menu-title.ui-menu-clickable").mousedown(function(){
             	if( !disabled( $(this) ) ){
             		$(this).addClass("ui-state-active");
             	}
+            	return false;
             }).mouseup(function(){
             	if( !disabled( $(this) ) ){
 	            	$(this).removeClass("ui-state-active");
 	            	onMenuItemClick( $(this) );
 	            	onMenuItemOn( $(this) );
             	}
+            	return false;
             }).bind("mouseout", function(){
             	if( !disabled( $(this) ) ){
             		$(this).removeClass("ui-state-active");
             	}
+            	return false;
             });
             
             ul.find(".ui-menu-item").mouseenter(function(){
@@ -414,6 +420,8 @@
                     	onMenuItemOn( $(this) );
                     }
                 }
+                
+                return false;
             });
             
             function closeAll() {
