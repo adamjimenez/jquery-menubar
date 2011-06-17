@@ -399,7 +399,7 @@ jQuery.fn.reverse = [].reverse;
                 });
             }
             
-            $("html").bind("mouseup", function(){
+            $("html").bind("click", function(){
                 closeAll();
             });
             
