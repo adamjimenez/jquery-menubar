@@ -47,13 +47,38 @@ jQuery.fn.reverse = [].reverse;
     		return $(ele).hasClass("ui-state-disabled") || $(ele).parents().hasClass("ui-state-disabled");
     	}
     	
-        var defaults = {
-            addArrow: true,
-            titleArrowText: "<small>&nbsp;&#9660;</small>",
-            menuOpenDelay: 200, // in ms
-            items: undefined,
-            closeOnEsc: true
-        };
+    	var defaults = {
+                
+    	        // whether or not to add the drop down arrow for top-level menu items
+    	        addArrow: true,
+    	        
+    	        // text to use as arrow
+    	        titleArrowText: "<small>&nbsp;&#9660;</small>",
+    	        
+    	        // how long to wait to open sublevel menu items
+    	        menuOpenDelay: 200,
+    	        
+    	        // whether to close the menu on pressing the escape key
+    	        closeOnEsc: true,
+    	        
+    	        // an array of more objects as the root list of menuitems
+    	        // e.g. 
+    	        // {
+    	        //     name: "Menu item", // the name of the menu item
+    	        //     checkable: false, // whether the menu item is checkable (or togglable for top-level items)
+    	        //     disabled: false, // whether the item should start off disabled
+    	        //     attr: null, // attributes to set on this menu item (e.g. { foo: "value of foo attr", bar: "value of bar attr" })
+    	        //     selecton: function(){}, // callback for when the item is selected on
+    	        //     selectoff: function(){}, // callback for when the item is selected off
+    	        //     select: function(selected)(){}, // callback for when item is clicked (selected set appropriately)
+    	        //     hoveron: function(){}, // callback for when the item is hovered over with the cursor
+    	        //     hoveroff: function(){}, // callback for when the item is hovered off with the cursor
+    	        //     open: function(){}, // callback for when a parent item is opened
+    	        //     close: function(){}, // callback for when a parent item is closed
+    	        //     items: [] // array of sub menu items
+    	        // }
+    	        items: undefined,
+    	};
         
         var options = $.extend(defaults, options); 
         
